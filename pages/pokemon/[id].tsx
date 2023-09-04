@@ -17,6 +17,14 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
       >
         <Grid xs={12} sm={4}>
           <Card hoverable css={{ padding: '30px' }}>
+          <Text h2 css={{ 
+                textTransform: 'capitalize',
+                fontFamily: '$mono',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                textAlign: 'center'
+              }}>
+                {pokemon.name}
+              </Text>
             <Card.Body>
               <Card.Image
                 src={pokemon.sprites.other?.dream_world.front_default || '/no-image.png'}
@@ -35,20 +43,18 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
               flexDirection: 'column',
               alignItems: 'flex-start',
 
-              '@media (min-width: 570px)': {
+              '@media (min-width: 40px)': {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               },
             }}>
-              <Text h2 css={{ 
-                textTransform: 'capitalize',
+              <Text size={30} css={{
                 fontFamily: '$mono',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
               }}>
-                {pokemon.name}
+                Sprites
               </Text>
-
               <Button
                 color="gradient"
                 ghost
@@ -63,12 +69,6 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
             </Card.Header>
 
             <Card.Body>
-              <Text size={20} css={{
-                fontFamily: '$mono',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-              }}>
-                Sprites
-              </Text>
               <Container css={{ display: 'flex', flexDirection: 'row' }}>
                 <Image
                   src={pokemon.sprites.front_default}
