@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { FC } from 'react';
 import { Navbar } from '../ui';
+import { ReactNode } from 'react';
+
 
 interface Props {
 
