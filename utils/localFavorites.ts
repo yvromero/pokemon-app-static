@@ -1,4 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
+
+// Guardar en localStorage un pokemon
 const toggleFavorite = ( id: number ) => {
 
     let favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]' );
@@ -13,6 +15,18 @@ const toggleFavorite = ( id: number ) => {
     localStorage.setItem('favorites', JSON.stringify( favorites ));
 }
 
+// Verificar si el pokemon existe
+const existInFavorites = ( id: number ): boolean => {
+
+    if ( typeof window === 'undefined' ) return false;
+    
+    const favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]' );
+
+    return favorites.includes( id );
+
+}
+
 export default {
+    existInFavorites,
     toggleFavorite,
 }
