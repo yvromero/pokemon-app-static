@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { GetStaticProps, NextPage, GetStaticPaths } from 'next';
 import { Button, Container, Grid, Card, Text, Image } from '@nextui-org/react';
 
+import confetti from 'canvas-confetti';
+
 import { Layout } from '@/components/layouts';
 import { localFavorites } from '@/utils';
 import { pokeApi } from '@/api';
@@ -21,7 +23,44 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite( pokemon.id );
     setisInFavorites( !isInFavorites );
-  }
+
+    if ( isInFavorites ) return;
+
+    var defaults = {
+      spread: 360,
+      ticks: 100,
+      gravity: 0,
+      decay: 0.99,
+      startVelocity: 30,
+      origin: {
+        x: 1,
+        y: 0,
+      },
+      shapes: ['star'],
+      colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+    };
+    
+    function shoot() {
+      confetti({
+        ...defaults,
+        particleCount: 100,
+        scalar: 1.2,
+        shapes: ['star']
+      });
+    
+      confetti({
+        ...defaults,
+        particleCount: 100,
+        scalar: 0.75,
+        shapes: ['circle']
+      });
+    }
+    
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 100);
+  setTimeout(shoot, 200);
+}
+
 
         return (
 
@@ -72,7 +111,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                           textTransform: 'none',
                           fontFamily: '$mono',
                         }}>
-                         { isInFavorites ? 'En Favoritos' : 'Agregar a Favoritos' }
+                        { isInFavorites ? 'En Favoritos' : 'Agregar a Favoritos' }
                     </Button>
                   </Card.Header>
 
