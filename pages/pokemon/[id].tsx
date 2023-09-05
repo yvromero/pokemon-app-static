@@ -1,14 +1,22 @@
 import { GetStaticProps, NextPage, GetStaticPaths } from 'next';
+import { Button, Container, Grid, Card, Text, Image } from '@nextui-org/react';
+
 import { Layout } from '@/components/layouts';
 import { pokeApi } from '@/api';
 import { Pokemon } from '@/interfaces';
-import { Button, Container, Grid, Card, Text, Image } from '@nextui-org/react';
+import { localFavorites } from '@/utils';
+
 
 interface Props {
   pokemon: Pokemon;
 }
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+
+
+  const onToggleFavorite = () => {
+    localFavorites.toggleFavorite( pokemon.id );
+  }
 
         return (
 
@@ -53,6 +61,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                     <Button
                       color="gradient"
                       ghost
+                      onClick={ onToggleFavorite }
                         css={{
                           marginLeft: 'auto',
                           textTransform: 'none',
